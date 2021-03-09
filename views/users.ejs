@@ -1,0 +1,32 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+
+  <div class="blogs content">
+    <h1>Users</h1>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(response => response.json())
+      .then(json => {
+        let div = document.getElementsByClassName("blogs content")[0];
+        div.innerHTML += `<br><hr><br>`;
+        for (var k in json) {
+            var obj = json[k];
+            div.innerHTML += `<h2 id="${obj["username"]}">${obj["name"]}</h2>`;
+            div.innerHTML += `<h5>Username: ${obj["username"]}</h5>`;
+            div.innerHTML += `<h5>Email: ${obj["email"]}</h5>`;
+            div.innerHTML += `<h5>Phone: ${obj["phone"]}</h5>`;
+            div.innerHTML += `<h5><a href="https://${obj["website"]}" class="web_link">${obj["website"]}</a></h5>`;
+            div.innerHTML += `<br><hr><br>`;
+        }
+      });
+  </script>
+
+  <%- include("./partials/footer.ejs") %>
+</body>
+</html>
